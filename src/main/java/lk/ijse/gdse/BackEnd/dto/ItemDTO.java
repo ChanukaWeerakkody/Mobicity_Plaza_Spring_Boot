@@ -14,11 +14,13 @@ import lombok.ToString;
 @Data
 @ToString
 public class ItemDTO {
-    private String itemid;
+    private String itemId;
+
     private String brand;
     private String description;
     private int qty;
     private double price;
     private String warranty;
-    private String imageBase64;
+
+    private String image;
 }

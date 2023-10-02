@@ -11,7 +11,8 @@ import java.util.List;
  **/
 
 public interface ItemService {
-    Item saveItem(ItemDTO itemDTO);
-    Item getItemById(Long id);
-    List<Item> getAllItems();
+    void saveItem(ItemDTO itemDTO);
+    void updateItem(ItemDTO itemDTO);
+    void deleteItem(String id);
+    void uploadItemImage(String image, String itemId);
 }

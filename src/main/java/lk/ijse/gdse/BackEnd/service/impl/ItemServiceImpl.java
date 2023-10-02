@@ -3,6 +3,7 @@ package lk.ijse.gdse.BackEnd.service.impl;
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.BackEnd.dao.ItemDAO;
 import lk.ijse.gdse.BackEnd.dto.ItemDTO;
+import lk.ijse.gdse.BackEnd.entity.Customer;
 import lk.ijse.gdse.BackEnd.entity.Item;
 import lk.ijse.gdse.BackEnd.service.ItemService;
 import org.modelmapper.ModelMapper;
@@ -27,27 +28,28 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     ItemDAO itemDAO;
 
-    @Override
-    public Item saveItem(ItemDTO itemDTO) {
-        Item item = new Item();
-        item.setItemid(itemDTO.getItemid());
-        item.setBrand(itemDTO.getBrand());
-        item.setDescription(itemDTO.getDescription());
-        item.setQty(itemDTO.getQty());
-        item.setPrice(itemDTO.getPrice());
-        item.setWarranty(itemDTO.getWarranty());
-        item.setImage(Base64.getDecoder().decode(itemDTO.getImageBase64()));
 
-        return itemDAO.save(item);
+    @Override
+    public void saveItem(ItemDTO itemDTO) {
+        if(!itemDAO.existsById(Long.valueOf(itemDTO.getItemId()))){
+            itemDAO.save(mapper.map(itemDTO, Item.class));
+        }else{
+            throw new RuntimeException("Customer id is exists!");
+        }
     }
 
     @Override
-    public Item getItemById(Long id) {
-        return itemDAO.findById(id).orElse(null);
+    public void updateItem(ItemDTO itemDTO) {
+
     }
 
     @Override
-    public List<Item> getAllItems() {
-        return itemDAO.findAll();
+    public void deleteItem(String id) {
+
+    }
+
+    @Override
+    public void uploadItemImage(String image, String itemId) {
+
     }
 }

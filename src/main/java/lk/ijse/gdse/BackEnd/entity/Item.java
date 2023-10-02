@@ -18,15 +18,13 @@ import lombok.ToString;
 @ToString
 public class Item implements SuperEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String itemId;
 
-    private String itemid;
     private String brand;
     private String description;
     private int qty;
     private double price;
     private String warranty;
-    @Lob
-    private byte[] image;
+
+    private String image;
 }

@@ -6,16 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 /**
  * @author : Chanuka Weerakkody
  * @since : 20.1.1
  **/
 @Entity
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
+
 public class Item implements SuperEntity {
     @Id
     private String itemId;
@@ -26,5 +27,6 @@ public class Item implements SuperEntity {
     private double price;
     private String warranty;
 
-    private String image;
+    @Lob
+    private byte[] image;
 }

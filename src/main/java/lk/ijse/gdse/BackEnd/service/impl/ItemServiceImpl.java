@@ -11,6 +11,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
@@ -30,12 +31,17 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
-    public void saveItem(ItemDTO itemDTO) {
-        if(!itemDAO.existsById(Long.valueOf(itemDTO.getItemId()))){
-            itemDAO.save(mapper.map(itemDTO, Item.class));
-        }else{
-            throw new RuntimeException("Customer id is exists!");
-        }
+    public void saveItem(ItemDTO itemDTO) throws IOException {
+        Item item = new Item();
+        item.setItemId(itemDTO.getItemId());
+        item.setBrand(itemDTO.getBrand());
+        item.setDescription(itemDTO.getDescription());
+        item.setQty(itemDTO.getQty());
+        item.setPrice(itemDTO.getPrice());
+        item.setWarranty(itemDTO.getWarranty());
+        item.setImage(itemDTO.getImage().getBytes());
+
+        itemDAO.save(item);
     }
 
     @Override

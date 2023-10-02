@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author : Chanuka Weerakkody
@@ -22,5 +23,6 @@ public class ItemDTO {
     private double price;
     private String warranty;
 
-    private String image;
+    private MultipartFile image;
+
 }

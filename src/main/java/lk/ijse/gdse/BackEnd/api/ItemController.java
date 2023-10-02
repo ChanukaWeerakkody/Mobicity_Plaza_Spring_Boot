@@ -58,4 +58,16 @@ public class ItemController {
 //        System.out.println(itemId+" "+brand+" "+description+" "+qty+" "+price+" "+warranty+" "+s);
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadImage(@ModelAttribute ItemDTO imageDTO) {
+        try {
+            itemService.saveItem(imageDTO);
+            return ResponseEntity.ok("Image uploaded successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error uploading the image");
+        }
+    }
+
 }
